@@ -11,6 +11,7 @@ import Write from './scenes/Write';
 import Error from './scenes/Error';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import './style.scss';
 
 const Layout = () => {
   return (

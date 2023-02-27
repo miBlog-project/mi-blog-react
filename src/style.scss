@@ -1,0 +1,58 @@
+$lightSkyBlue: #87cefa;
+
+.app {
+
+  .container {
+    // For Login and Register pages
+    .auth {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: $lightSkyBlue;
+
+      h1 {
+        font-size: 30px;
+        color: #0f52ba;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        padding: 45px;
+        background-color: white;
+        width: 300px;
+        gap: 20px;
+
+        input {
+          padding: 10px;
+          border: none;
+          border-bottom: 1px solid black;
+        }
+
+        button {
+          font-size: 15px;
+          font-weight: bold;
+          padding: 10px;
+          border: none;
+          background-color: #0f52ba;
+          cursor: pointer;
+          color: white;
+        }
+
+        p {
+          font-size: 12px;
+          text-align: center;
+          color: red;
+        }
+
+        span {
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
