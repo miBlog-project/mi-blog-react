@@ -3,6 +3,16 @@ $lightSkyBlue: #87cefa;
 .app {
 
   .container {
+    // For Error page
+    .error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 70vh;
+      gap: 15px;
+    }
+
     // For Login and Register pages
     .auth {
       display: flex;
