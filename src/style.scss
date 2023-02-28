@@ -1,8 +1,18 @@
 $lightSkyBlue: #87cefa;
+$lightSteelBlue: #b0c4de;
 
 .app {
+  display: flex;
+  justify-content: center;
 
   .container {
+    width: 1024px;
+
+    .link {
+      text-decoration: none;
+      color: inherit;
+    }
+
     // For Error page
     .error {
       display: flex;
@@ -21,6 +31,7 @@ $lightSkyBlue: #87cefa;
       justify-content: center;
       height: 100vh;
       background-color: $lightSkyBlue;
+      border-radius: 50px;
 
       h1 {
         font-size: 30px;
@@ -61,6 +72,130 @@ $lightSkyBlue: #87cefa;
         span {
           font-size: 12px;
           text-align: center;
+        }
+      }
+    }
+
+    // For Navbar
+    .navbar {
+      .container {
+        padding: 10px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+          img {
+            width: 120px;
+          }
+        }
+
+        .links {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+
+          h4 {
+            font-size: 16px;
+            font-weight: 400;
+
+            &:hover {
+              font-style: oblique;
+            }
+          }
+
+          span {
+            cursor: pointer;
+          }
+
+          .write {
+            background-color: $lightSteelBlue;
+            color: darkblue;
+            font-weight: bold;
+            width: 80px;
+            height: 35px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+              background-color: #bed4f0;
+            }
+          }
+        }
+      }
+    }
+
+    // For Footer
+    footer {
+      margin-top: 75px;
+      padding: 20px;
+      background-color: $lightSkyBlue;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      img {
+        height: 55px;
+      }
+
+      .links {
+        display: flex;
+        align-items: center;
+        gap: 15px;    
+      }
+    }
+
+    // For Home page
+    .home {
+      .posts {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+
+        .post {
+          display: flex;
+          flex-direction: row-reverse;
+          gap: 100px;
+          border-radius: 5px;
+          box-shadow: 0 0 5px 0 lightgray;
+          transition: .5s ease;
+
+          &:hover {
+            box-shadow: 0 0 0 5px black;
+            transition: .5s ease;
+          }
+
+          .img {
+            flex: 2;
+            margin: 20px;
+
+            img {
+              border-radius: 5px;
+              width: 100%;
+              max-height: 300px;
+              object-fit: cover;
+            }
+          }
+
+          .content {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 20px;
+
+            h1 {
+              font-size: 30px;
+              font-weight: 700;
+            }
+
+            p {
+              font-size: 16px;
+            }
+          }
         }
       }
     }

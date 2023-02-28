@@ -4,9 +4,10 @@ import {
   Outlet
 } from 'react-router-dom';
 import Home from './scenes/Home';
+import About from './scenes/About';
 import Login from './scenes/Login';
 import Register from './scenes/Register';
-import Blog from './scenes/Blog';
+import Post from './scenes/Post';
 import Write from './scenes/Write';
 import Error from './scenes/Error';
 import Navbar from './components/Navbar';
@@ -33,8 +34,12 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: "/blog/:id",
-        element: <Blog />
+        path: "/about",
+        element: <About />
+      },
+      {
+        path: "/post/:id",
+        element: <Post />
       },
       {
         path: "/write",
