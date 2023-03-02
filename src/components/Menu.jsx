@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Menu = () => {
   // Example posts
   const posts = [
     {
@@ -39,28 +39,18 @@ const Home = () => {
   ];
 
   return (
-    <div className="home">
-      <div className="posts">
-        {posts.map(post => (
+    <div className="menu">
+      <h1>Explore Other Posts</h1>
+      {posts.map(post => (
+        <Link className="link" to={`/post/${post.id}`}>
           <div className="post" key={post.id}>
-            <div className="img">
-              <Link className="link" to={`/post/${post.id}`}>
-                <img src={post.img} alt="post pic" />
-              </Link>
-            </div>
-            <div className="content">
-              <p><b>{post.author}</b></p>
-              <Link className="link" to={`/post/${post.id}`}>
-                <h1>{post.title}</h1>
-              </Link>
-              <p>{post.desc}</p>
-              <p>{post.cateogry}</p>
-            </div>
+            <img src={post.img} alt="post pic" />
+            <h3>{post.title}</h3>
           </div>
-        ))}
-      </div>
+        </Link>
+      ))}
     </div>
   );
 }
 
-export default Home;
+export default Menu;
