@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 import Menu from '../components/Menu';
 import axios from 'axios';
@@ -9,15 +9,22 @@ import logo from '../images/miBlog-default-user-logo.png';
 const Post = () => {
   const [post, setPost] = useState({});
   const [error, setError] = useState(null);
+  const [deleteError, setDeleteError] = useState(null);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { currentUser } = useContext(AuthContext);
 
   const postId = location.pathname.split("/")[2];
 
   const handleDelete = async () => {
-    
+    try {
+      await axios.delete(`/posts/${postId}`);
+      navigate("/");
+    } catch (err) {
+      setDeleteError(`${err.response.status} : Failed to delete`);
+    }
   }
 
   useEffect(() => {
@@ -56,14 +63,15 @@ const Post = () => {
                 <span>Edit</span>
               </Link>
               <span onClick={handleDelete}>Delete</span>
+              {deleteError && <p style={{color: "red"}}>{ deleteError }</p>}
             </div>
             )}
-            <img src={post?.img} alt="post pic" />
+            {post.img && <img src={post.img} alt="post pic" />}
             {post.desc}
           </>
         )}
       </div>
-      <Menu />
+      <Menu cat={post.cat} />
     </div>
   );
 }
