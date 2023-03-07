@@ -12,6 +12,7 @@ import Write from './scenes/Write';
 import Error from './scenes/Error';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Profile from './scenes/Profile';
 import './style.scss';
 
 const Layout = () => {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/write",
         element: <Write />
+      },
+      {
+        path: "/profile",
+        element: <Profile />
       },
     ],
     errorElement: <Error />,

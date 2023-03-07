@@ -23,18 +23,24 @@ const Menu = ({ cat }) => {
   return (
     <div className="menu">
       <h1>Explore Other Posts</h1>
-      {relatedPosts.map(relatedPost => (
-        <div className="post" key={relatedPost.id}>
-          <Link className="link" to={`/post/${relatedPost.id}`}>
-            {relatedPost.img ? (
-            <img src={relatedPost.img} alt="related post pic" />
-            ) : (
-            <img src={defaultImage} alt="default related post pic" />
-            )}
-            <h3>{relatedPost.title}</h3>
-          </Link>
-        </div>
-      ))}
+      {error ? (
+        <p style={{textAlign: "center"}}>{error}</p>
+        ) : (
+        <>
+          {relatedPosts.map(relatedPost => (
+            <div className="post" key={relatedPost.id}>
+              <Link className="link" to={`/post/${relatedPost.id}`}>
+                {relatedPost.img ? (
+                <img src={`http://localhost:8000/uploads/${relatedPost.img}`} alt="related post pic" />
+                ) : (
+                <img src={defaultImage} alt="default related post pic" />
+                )}
+                <h3>{relatedPost.title}</h3>
+              </Link>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 }

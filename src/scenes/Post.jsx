@@ -5,6 +5,7 @@ import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
 import logo from '../images/miBlog-default-user-logo.png';
+import DOMPurify from "dompurify";
 
 const Post = () => {
   const [post, setPost] = useState({});
@@ -50,24 +51,28 @@ const Post = () => {
             <h1>{post.title}</h1>
             <div className="user">
               {post.image ? (
-              <img src={post.image} alt="user pic" />
+              <img src={`http://localhost:8000/uploads/${post.image}`} alt="user pic" />
               ) : (
               <img src={logo} alt="default user pic" />
               )}
               <span><b>・ {post.username} ・</b></span>
-              <p>Updated {moment(post.data).fromNow()}</p>
+              <p>Updated {moment(post.data).format("L")}</p>
             </div>
             {currentUser.username === post.username && (
             <div className="edit">
-              <Link className="link" to={`/write?edit=2`}>
+              <Link className="link" to={`/write?edit=${post.id}`} state={post} >
                 <span>Edit</span>
               </Link>
               <span onClick={handleDelete}>Delete</span>
               {deleteError && <p style={{color: "red"}}>{ deleteError }</p>}
             </div>
             )}
-            {post.img && <img src={post.img} alt="post pic" />}
-            {post.desc}
+            {post.img && <img src={`http://localhost:8000/uploads/${post.img}`} alt="post pic" />}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(post.desc),
+              }}
+            ></p>
           </>
         )}
       </div>
