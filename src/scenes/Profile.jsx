@@ -9,19 +9,17 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
-  const [uploadError, setUploadError] = useState(null);
-  const [updateError, setUpdateError] = useState(null);
-  // TODO need error for checking if fields are not empty
+  const [error, setError] = useState(null);
 
   const uploadFile = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-
+      
       const res = await axios.post("/upload", formData);
       return res.data;
     } catch (err) {
-      setUploadError("Upload Failed");
+      setError("Upload Failed");
     }
   }
 
@@ -32,12 +30,12 @@ const Profile = () => {
 
     try {
       await axios.post("/users/", {
-        image: file ? imgUrl : "",
+        image: imgUrl,
       });
-
+      
       navigate("/");
     } catch (err) {
-      setUpdateError(`${err.response.status} : Failed to update`);
+      setError(`${err.response.status} : Failed to update`);
     }
   }
 
@@ -51,9 +49,8 @@ const Profile = () => {
           <input className="file" type="file" name="file" id="file" onChange={e => setFile(e.target.files[0])} />
           <label htmlFor="file">Choose an Image</label>
         </div>
-        {uploadError && <p style={{color: "red"}}>{ uploadError }</p>}
         <button onClick={handleUpdate}>Save Changes</button>
-        {updateError && <p style={{color: "red"}}>{ updateError }</p>}
+        {error && <p style={{color: "red"}}>{ error }</p>}
       </>
       ) : (
       <p style={{fontSize: "20px", color: "darkblue"}}>Need to Login to view page</p>

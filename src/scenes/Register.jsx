@@ -23,11 +23,15 @@ const Register = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     
-    try {
-      await axios.post("/auth/register", userInputs);
-      navigate("/login");
-    } catch (err) {
-      setError(err.response.data);
+    if (userInputs.email && userInputs.username && userInputs.password) {
+      try {
+        await axios.post("/auth/register", userInputs);
+        navigate("/login");
+      } catch (err) {
+        setError(err.response.data);
+      }
+    } else {
+      setError("Input fields cannot be empty");
     }
   }
 
@@ -35,9 +39,9 @@ const Register = () => {
     <div className="auth">
       <h1>Register</h1>
       <form>
-        <input required type="email" placeholder="Email" name="email" onChange={handleInputChange} />
-        <input required type="text" placeholder="Username" name="username" onChange={handleInputChange} />
-        <input required type="password" placeholder="Password" name="password" onChange={handleInputChange} />
+        <input type="email" placeholder="Email" name="email" onChange={handleInputChange} />
+        <input type="text" placeholder="Username" name="username" onChange={handleInputChange} />
+        <input type="password" placeholder="Password" name="password" onChange={handleInputChange} />
         <button onClick={handleSubmit}>Register</button>
         {error && <p>{error}</p>}
         <span>Already have account? <Link to="/login">Login here</Link>

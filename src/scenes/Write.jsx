@@ -14,18 +14,17 @@ const Write = () => {
   const [title, setTitle] = useState(state?.title || "");
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
-  const [uploadError, setUploadError] = useState(null);
-  const [updateError, setUpdateError] = useState(null);
+  const [error, setError] = useState(null);
 
   const uploadFile = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-
+      
       const res = await axios.post("/upload", formData);
       return res.data;
     } catch (err) {
-      setUploadError("Upload Failed");
+      setError("Upload Failed");
     }
   }
 
@@ -40,7 +39,7 @@ const Write = () => {
           title,
           desc,
           cat,
-          img: file ? imgUrl : "",
+          img: imgUrl,
         });
 
         navigate("/"); 
@@ -49,14 +48,14 @@ const Write = () => {
           title,
           desc,
           cat,
-          img: file ? imgUrl : "",
+          img: imgUrl,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
         });
 
         navigate("/");
       }
     } catch (err) {
-      setUpdateError(`${err.response.status} : Failed to update`);
+      setError(`${err.response.status} : Failed to update`);
     }
   }
 
@@ -74,7 +73,6 @@ const Write = () => {
           <input className="file" type="file" name="file" id="file" onChange={e => setFile(e.target.files[0])} />
           <label htmlFor="file">Choose an Image</label>
         </div>
-        {uploadError && <p style={{color: "red"}}>{ uploadError }</p>}
         <div className="category">
           <label><b>Category : </b></label>
           <div className="radio">
@@ -104,7 +102,7 @@ const Write = () => {
       </div>
       <div className="edit">
         <button onClick={handleUpdate}>Save Changes</button>
-        {updateError && <p style={{color: "red"}}>{ updateError }</p>}
+        {error && <p style={{color: "red"}}>{ error }</p>}
       </div>
     </div>
   );

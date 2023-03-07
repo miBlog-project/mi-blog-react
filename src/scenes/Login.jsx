@@ -24,11 +24,15 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     
-    try {
-      await userLogin(userInputs);
-      navigate("/");
-    } catch (err) {
-      setError(err.response.data);
+    if (userInputs.username && userInputs.password) {
+      try {
+        await userLogin(userInputs);
+        navigate("/");
+      } catch (err) {
+        setError(err.response.data);
+      }    
+    } else {
+      setError("Input fields cannot be empty");
     }
   }
 
@@ -36,8 +40,8 @@ const Login = () => {
     <div className="auth">
       <h1>Login</h1>
       <form>
-        <input required type="text" placeholder="Username" name="username" onChange={handleInputChange} />
-        <input required type="password" placeholder="Password" name="password" onChange={handleInputChange} />
+        <input type="text" placeholder="Username" name="username" onChange={handleInputChange} />
+        <input type="password" placeholder="Password" name="password" onChange={handleInputChange} />
         <button onClick={handleSubmit}>Login</button>
         {error && <p>{error}</p>}
         <span>No account? <Link to="/register">Register here</Link>
